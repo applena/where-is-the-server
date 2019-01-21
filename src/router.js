@@ -11,17 +11,34 @@ const router = express.Router();
 
 //router.get('/:username/:functionName', require(`./users/${req.params.username}/${req.params.functionName}`));
 
-router.get('/john', (req, res, next) => {
-  console.log('request.params =', req.params, 'request.body =', req.body);
+router.get('/:username/:functionName', (request, response, next) => {
+  let username=request.params.username;
+  let functionName=request.params.functionName;
+  let userFunction = require(`./users/${username}/${functionName}`);
+  userFunction(request, response, next);
 });
 
 // router.get('/:username/:functionName', getFunction);
 
 // function getFunction(req, res, next){
+
+
+
+//   // req.username.get()
+//   // .then( data => {
+//   //   const output = {
+//   //     count: data.length,
+//   //     results: data,
+//   //   };
+//   //   response.status(200).json(output);
+//   // })
+//   // .catch( next );
+
+
 //   console.log('entering the getFunction', 'request params =', req.params);
-//   let username = req.params.username;
-//   let functionName = req.params.functionName;
-//   require(`./users/${username}/${functionName}`);
+//   // let username = req.params.username;
+//   // let functionName = req.params.functionName;
+//   // require(`./users/${username}/${functionName}`);
 // }
 
 module.exports = router;
