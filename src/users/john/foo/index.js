@@ -1,8 +1,7 @@
 'use strict'
 
-module.exports = function (req, res, next){
+module.exports = function (){
   console.log('entering foo');
-  console.log(req.body, 'req');
-  let obj = {"name":"foo", "last":"bar"};
-  res.status(200);
+  return {"name":"foo", "last":"bar"};
+  
 }
