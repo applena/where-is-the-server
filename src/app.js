@@ -12,13 +12,10 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
-require('./models/categories');
-require('./models/products');
-
 // Esoteric Resources
 const errorHandler = require( `${cwd}/src/middleware/error.js`);
-const notFound = require( `${cwd}/src/middleware/404.js` );
-const v1Router = require( `${cwd}/src/api/v1.js` );
+const notFound = require( `${cwd}/src/middleware/notFound.js` );
+const router = require( `${cwd}/src/router.js` );
 
 // Prepare the express app
 const app = express();
@@ -34,7 +31,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/docs', express.static('docs'));
 
 // Routes
-app.use(v1Router);
+app.use(router);
 
 // Catchalls
 app.use('*', notFound);

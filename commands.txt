@@ -1,0 +1,20 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Local style
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~ new users with admin capability
+echo '{"username":"john", "password":"johnny", "capabilities":["create","update", "delete"]}' | http post :3000/signup
+
+
+~~~ signin for various users
+http post :3000/signin -a john:johnny
+
+POST requests:
+echo '{"username":"thomas", "password":"thom"}' | http post :3000/thomas -a thomas:thom
+
+
+GET requests
+http :3000/
+
+DELETE requests:
+http delete :3000/ -a john:johnny 
