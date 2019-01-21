@@ -1,6 +1,5 @@
 'use strict';
 
 module.exports = function () {
-  let obj = {"name":"bar", "last":"baz"};
-  res.send(obj);
+  return {"name":"bar", "last":"baz"};
 }
