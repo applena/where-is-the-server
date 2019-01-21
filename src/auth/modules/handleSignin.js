@@ -8,6 +8,7 @@
  * @param {function} next Express middleware function
  */
 module.exports = function(req, res, next){
+  console.log('inside signin function');
   res.cookie('auth', req.token);
   res.send(req.token);
 }; 

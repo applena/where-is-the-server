@@ -13,9 +13,11 @@ const User = require('../models/users-model.js');
  * @param {function} next Express middleware function
  */
 module.exports = function(req, res, next){
+  console.log('inside handleSingup');
   let user = new User(req.body);
   user.save()
     .then((user) => {
+      console.log(user);
       User.findOne({_id: user._id})
         .then(user => {
           req.token = user.generateToken();
