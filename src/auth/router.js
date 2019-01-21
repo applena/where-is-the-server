@@ -8,5 +8,6 @@ const handleSignin = require('./modules/handleSignin');
 
 
 authRouter.post('/signup', handleSignup);
-authRouter.post('/signup', auth(), handleSignin);
+authRouter.post('/signin', auth(), handleSignin);
 
+module.exports = authRouter;

@@ -16,7 +16,7 @@ const morgan = require('morgan');
 const errorHandler = require( `${cwd}/src/middleware/error.js`);
 const notFound = require( `${cwd}/src/middleware/notFound.js` );
 const router = require( `${cwd}/src/router.js` );
-
+const authRouter = require(`./auth/router.js`);
 // Prepare the express app
 const app = express();
 
@@ -31,6 +31,7 @@ app.use(express.urlencoded({extended:true}));
 app.use('/docs', express.static('docs'));
 
 // Routes
+app.use(authRouter);
 app.use(router);
 
 // Catchalls
@@ -47,4 +48,5 @@ let start = (port = process.env.PORT) => {
   });
 };
   
+ 
 module.exports = {app,start};

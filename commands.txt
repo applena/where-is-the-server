@@ -3,7 +3,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~ new users with admin capability
-echo '{"username":"john", "password":"johnny", "capabilities":["create","update", "delete"]}' | http post :3000/signup
+echo '{"username":"john", "password":"johnny", "capabilities":["c","u", "d"]}' | http post :3000/signup
 
 
 ~~~ signin for various users
