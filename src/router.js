@@ -9,6 +9,17 @@ const fsPromises = fs.promises;
 const parseJson = require('./modules/parseJson');
 const Function = require('./auth/models/functions-model');
 const valid_path = require('./modules/valid_path');
+const User = require('./auth/models/users-model');
+require('mongoose');
+
+router.get('/getOne', auth('r'), function(req, res, next) {
+  let query = {_id:req.user._id};
+  User.find(query)
+    .then(u => {
+      res.status(200).json(u);
+    })
+    .catch(next);
+});
 
 // get all the functions for a user
 router.get('/functions/:username/', handleGetUserFunctions);
@@ -47,15 +58,17 @@ function handleCreateFunction(req, res, next){
   }
 
   let functionCode = req.body.functionCode;
-  let userName = 'betty';
+  let userName = req.user.username;
+
+  let dbObj = {functionName:functionName, username:userName};
 
   let userDirectory = `./src/users/${userName}`;
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
- // saveFunction(functionName);
+  //saveFunction(functionName);
   //let functionName = nameFunction.toLowerCase();
-  let newFunction = new Function(req.body);
+  let newFunction = new Function(dbObj);
 
   newFunction.save()
     .then((functionN) => {
