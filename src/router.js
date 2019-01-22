@@ -3,10 +3,11 @@
 const util = require('util');
 const express = require('express');
 const router = express.Router();
-const auth = require('./auth/router.js');
+const auth = require('./auth/auth-middleware');
 const fs = require ('fs');
 const fsPromises = fs.promises;
 const parseJson = require('./modules/parseJson');
+const Function = require('./auth/models/functions-model');
 const valid_path = require('./modules/valid_path');
 
 // get all the functions for a user
@@ -26,11 +27,12 @@ router.get('/:username/:functionName', (request, response, next) => {
  
 });
 
-// TODO: add auth
-router.post('/createFunction', handleCreateFunction);
 
-async function handleCreateFunction(req, res, next){
-  let functionName = req.body.functionName.toLowerCase();
+
+router.post('/createFunction', auth('c'), handleCreateFunction);
+
+function handleCreateFunction(req, res, next){
+  let functionName = req.body.functionName;
 
   if( !valid_path(functionName) ) {
     next('Invalid function name');
@@ -45,15 +47,25 @@ async function handleCreateFunction(req, res, next){
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
-  // console.log(`req.body: ${util.inspect(req.body)}`);
-  // console.log(`functionName: ${functionName}`);
-  // console.log(`functionCode: ${req.body.functionCode}`);
+ // saveFunction(functionName);
+  //let functionName = nameFunction.toLowerCase();
+  let newFunction = new Function(req.body);
 
-  await handleCreate(userDirectory);
-  await handleCreate(functionDirectory);
-  await handleCreate(functionFile, functionCode);
+  newFunction.save()
+    .then((functionN) => {
+      async function runThemAll(){
 
-  res.status(200).send();
+        await handleCreate(userDirectory);
+        await handleCreate(functionDirectory);
+        await handleCreate(functionFile, functionCode);
+      
+        res.status(200).send();
+
+      }
+      runThemAll();
+    })
+    .catch(next);
+
 }
 
 // returns true if the path given exists, otherwise false
@@ -69,7 +81,7 @@ async function fileExists(path){
 // creates a file or directory if it does not exist
 // if a file exists, over-write it with the data provided
 async function handleCreate(path, data){
-
+  console.log('in handleCreate');
   if (data){
     await fsPromises.writeFile(path, data);
   }

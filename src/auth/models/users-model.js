@@ -40,6 +40,7 @@ users.statics.authenticateToken = function(token){
     let parsedToken = jwt.verify(token, SECRET);
     console.log(parsedToken);
     let query = {_id: parsedToken.id};
+    console.log('token passsed');
     return this.findOne(query);
   }
   catch(e){
@@ -58,9 +59,9 @@ users.methods.generateToken = function(type){
   return jwt.sign(token, SECRET);
 };
 
-users.method.can = function(capabililty){
+users.methods.can = function(capability){
 
-  return this.capability.includes(capabililty);
+  return this.capability.includes(capability);
 };
 
 
