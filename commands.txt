@@ -19,10 +19,17 @@ echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunc
 
 GET requests
 http :3000/
+http :3000/betty/helloworld
 
 DELETE requests:
 http delete :3000/ -a john:johnny 
 
 
 
+
+'use strict';
+
+module.exports = () => {
+  return 'hello world';
+};
 
