@@ -2,7 +2,7 @@
 
 /**
  * API Server module.
- * @module src/server.js
+ * @module src/app
  */
 
 const cwd = process.cwd();

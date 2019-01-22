@@ -5,10 +5,14 @@ const valid_path = require('../../modules/valid_path');
 const util = require('util');
 
 /**
- * @module handleSignup.js
+ * @module src/auth/modules/handleSignup
+ */
+
+/**
  *
  * Handles the User Signup, sends the user to the auth middleware to aquire a token
  * 
+ * @function handleSignup.js
  * @param {object} req Express request object
  * @param {object} res Express request object
  * @param {function} next Express middleware function

@@ -2,7 +2,7 @@
 
 /**
  * 500 Middleware
- * @module middleware/500
+ * @module src/middleware/error
  */
 
 /**

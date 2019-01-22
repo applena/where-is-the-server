@@ -1,5 +1,13 @@
 'use strict';
 
+
+
+/**
+ * Determines whether a string is valid for file paths
+ * @module src/modules/valid_path
+ * @param string
+ * @returns boolean
+ */
 function validator(string){
   let valid = false;
 
