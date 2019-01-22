@@ -3,14 +3,15 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~ new users with admin capability
-echo '{"username":"john", "password":"johnny", "capabilities":["c","u", "d"]}' | http post :3000/signup
+echo '{"username":"john", "password":"johnny", "capabilities":["c","u","d"]}' | http post :3000/signup
+echo '{"username":"betty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
 
 
 ~~~ signin for various users
 http post :3000/signin -a john:johnny
 
 POST requests:
-echo '{"username":"thomas", "password":"thom"}' | http post :3000/thomas -a thomas:thom
+echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunction -a betty:boop
 
 
 GET requests
@@ -18,3 +19,7 @@ http :3000/
 
 DELETE requests:
 http delete :3000/ -a john:johnny 
+
+
+
+
