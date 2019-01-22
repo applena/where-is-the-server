@@ -31,7 +31,7 @@ users.pre('find', function(){
   console.log('in the pre findOne');
   try{
     console.log('inside of try');
-    this.populate('users');
+    this.populate('functions');
   }
   catch(e){
     console.error('Find error', e);
