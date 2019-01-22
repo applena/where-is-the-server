@@ -7,8 +7,8 @@ const auth = require('./auth/auth-middleware');
 const fs = require ('fs');
 const fsPromises = fs.promises;
 const parseJson = require('./modules/parseJson');
-//const saveFunction = require('./auth/modules/saveFunction');
 const Function = require('./auth/models/functions-model');
+const valid_path = require('./modules/valid_path');
 
 // get all the functions for a user
 router.get('/functions/:username/', handleGetUserFunctions);
@@ -28,10 +28,17 @@ router.get('/:username/:functionName', (request, response, next) => {
 });
 
 
+
 router.post('/createFunction', auth('c'), handleCreateFunction);
 
 function handleCreateFunction(req, res, next){
   let functionName = req.body.functionName;
+
+  if( !valid_path(functionName) ) {
+    next('Invalid function name');
+    return;
+  }
+
   let functionCode = req.body.functionCode;
   // let userName = req.body.userName; //needs to be attached to the request by the auth middleware
   let userName = 'betty';
