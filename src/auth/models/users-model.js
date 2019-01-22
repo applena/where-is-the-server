@@ -1,5 +1,7 @@
 'use strict';
 
+require('./functions-model');
+
 /**
  * 
  * @module src/auth/models/users-model
@@ -16,6 +18,24 @@ const users = new mongoose.Schema({
   username: {type:String, required: true, unique:true},
   password: {type:String, required: true},
   capability: {type:[String], default:['c','r','u','d']},
+},{ toObject:{virtuals:true}, toJSON:{virtuals:true} });
+
+users.virtual('functions', {
+  ref: 'functions',
+  localField: 'username',
+  foreignField: 'username',
+  justOne:false,
+});
+
+users.pre('find', function(){
+  console.log('in the pre findOne');
+  try{
+    console.log('inside of try');
+    this.populate('users');
+  }
+  catch(e){
+    console.error('Find error', e);
+  }
 });
 
 users.pre('save', function(next){
