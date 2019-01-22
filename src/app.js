@@ -17,6 +17,9 @@ const errorHandler = require( `${cwd}/src/middleware/error.js`);
 const notFound = require( `${cwd}/src/middleware/notFound.js` );
 const router = require( `${cwd}/src/router.js` );
 const authRouter = require(`./auth/router.js`);
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('../documentation/swagger/swagger.json');
+
 // Prepare the express app
 const app = express();
 
@@ -30,9 +33,13 @@ app.use(express.urlencoded({extended:true}));
 // Static Routes
 app.use('/docs', express.static('docs'));
 
+// Swagger
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // Routes
 app.use(authRouter);
 app.use(router);
+
 
 // Catchalls
 app.use('*', notFound);

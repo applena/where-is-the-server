@@ -1,7 +1,8 @@
 'use strict'
 
-module.exports = function (){
-  console.log('entering foo');
-  return {"name":"foo", "last":"bar"};
+module.exports = function (context){
+  //console.log('entering foo with ', {context});
+
+  return {"name":"foo", "last":"bar", param:context.param};
   
 }
