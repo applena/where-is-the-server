@@ -4,27 +4,30 @@ const superagent = require('superagent');
 
 module.exports = function(){
 
-  const url = 'https://swapi.co/api/people/';
-  
-  let peopleURLs;
-  
-  superagent.get(url)
-    .then( (result) => {
-      // console.log(result.body);
-      peopleURLs = result.body.results.map( (person) => {
-        return person.url;
+  let url = 'https://swapi.co/api/people/';
+
+  return superagent.get(url)
+    .then( (res) => {
+      let peopleArr = res.body.results;
+      let urls = peopleArr.map( (val) => {
+        let url = val.url;
+        return url;
       });
-      // console.log(peopleURLs);
-      const promiseArr = [];
-      for(let i = 0; i < peopleURLs.length; i++){
-        promiseArr.push(superagent.get(peopleURLs[i]));
+      return urls;
+    })
+    .then( (urls) => {
+      const promiseArr = []; 
+      for( let i = 0; i < urls.length; i++){
+        promiseArr.push(superagent.get(urls[i]));
       }
-      // let result = [];
-      Promise.all(promiseArr)
-        .then( (result) => {
-          for(let i = 0; i < result.length; i++){
-            console.log(result[i].body.name);
-          }
-        });
-    });
+      return Promise.all(promiseArr);
+    })
+    .then( (results) => {
+      let namesArr = results.map( person => {
+        return person.body.name;
+      });
+
+      return namesArr;
+    })
+    .catch( (err) => {throw err;});
 };
