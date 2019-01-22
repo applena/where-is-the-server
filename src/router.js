@@ -3,10 +3,11 @@
 const util = require('util');
 const express = require('express');
 const router = express.Router();
-const auth = require('./auth/auth-middleware.js');
+const auth = require('./auth/auth-middleware');
 const fs = require ('fs');
 const fsPromises = fs.promises;
 const parseJson = require('./modules/parseJson');
+const Function = require('./auth/models/functions-model');
 const valid_path = require('./modules/valid_path');
 
 // get all the functions for a user
@@ -36,8 +37,9 @@ router.post('/createFunction', auth('c'), handleCreateFunction);
  * @param next
  * @returns
  */
-async function handleCreateFunction(req, res, next){
-  let functionName = req.body.functionName.toLowerCase();
+
+function handleCreateFunction(req, res, next){
+  let functionName = req.body.functionName;
 
   if( !valid_path(functionName) ) {
     next('Invalid function name');
@@ -45,18 +47,31 @@ async function handleCreateFunction(req, res, next){
   }
 
   let functionCode = req.body.functionCode;
-  // let userName = req.body.userName; //needs to be attached to the request by the auth middleware
   let userName = 'betty';
 
   let userDirectory = `./src/users/${userName}`;
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
-  await handleCreate(userDirectory);
-  await handleCreate(functionDirectory);
-  await handleCreate(functionFile, functionCode);
+ // saveFunction(functionName);
+  //let functionName = nameFunction.toLowerCase();
+  let newFunction = new Function(req.body);
 
-  res.status(200).send();
+  newFunction.save()
+    .then((functionN) => {
+      async function runThemAll(){
+
+        await handleCreate(userDirectory);
+        await handleCreate(functionDirectory);
+        await handleCreate(functionFile, functionCode);
+      
+        res.status(200).send();
+
+      }
+      runThemAll();
+    })
+    .catch(next);
+
 }
 
 /**
@@ -80,7 +95,7 @@ async function fileExists(path){
  * @param string data
  */
 async function handleCreate(path, data){
-
+  console.log('in handleCreate');
   if (data){
     await fsPromises.writeFile(path, data);
   }
