@@ -1,7 +1,8 @@
 'use strict';
 
 const User = require('../models/users-model.js');
-
+const valid_path = require('../../modules/valid_path');
+const util = require('util');
 
 /**
  * @module handleSignup.js
@@ -14,6 +15,12 @@ const User = require('../models/users-model.js');
  */
 module.exports = function(req, res, next){
   console.log('inside handleSingup');
+
+  if( !valid_path(req.body.username) ) {
+    next('Invalid username');
+    return;
+  }
+
   let user = new User(req.body);
   user.save()
     .then((user) => {

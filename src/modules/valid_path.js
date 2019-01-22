@@ -4,7 +4,7 @@ function validator(string){
   let valid = false;
 
   let regex = /[^\w]/gm;
-  let result = str.search(regex);
+  let result = string.search(regex);
   if (result === -1){
     valid = true;
   }

@@ -6,6 +6,9 @@
 echo '{"username":"john", "password":"johnny", "capabilities":["c","u","d"]}' | http post :3000/signup
 echo '{"username":"betty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
 
+invalid name:
+echo '{"username":"b e  t ty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
+
 
 ~~~ signin for various users
 http post :3000/signin -a john:johnny
