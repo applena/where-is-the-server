@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.js",
-    "test": "jest --verbose --coverage",
-    "test-watch": "jest --watchAll --verbose --coverage",
+    "test-watch": "jest --watchAll",
+    "test": "jest",
     "start": "node index.js"
   },
   "repository": {

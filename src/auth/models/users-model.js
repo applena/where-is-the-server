@@ -9,7 +9,7 @@ const SECRET = process.env.SECRET;
 const users = new mongoose.Schema({
   username: {type:String, required: true, unique:true},
   password: {type:String, required: true},
-  capability: {type:[String], default:['c','u','d']},
+  capability: {type:[String], default:['c','r','u','d']},
 });
 
 users.pre('save', function(next){

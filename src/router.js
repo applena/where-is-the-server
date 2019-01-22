@@ -6,6 +6,7 @@ const router = express.Router();
 const auth = require('./auth/router.js');
 const fs = require ('fs');
 const fsPromises = fs.promises;
+const parseJson = require('./modules/parseJson');
 
 // get all the functions for a user
 router.get('/functions/:username/', handleGetUserFunctions);
@@ -17,7 +18,11 @@ router.get('/:username/:functionName', (request, response, next) => {
   let userFunction = require(`./users/${username}/${functionName}`);
   //console.log({context}, 'context');
   
-  response.status(200).send(userFunction(context));
+  let output = parseJson(userFunction(context));
+
+  if (output){ response.status(200).json(userFunction(context)); } 
+  else { response.status(200).send(userFunction(context)); }
+ 
 });
 
 // TODO: add auth
