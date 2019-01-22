@@ -23,53 +23,55 @@ router.get('/:username/:functionName', (request, response, next) => {
 
 
 router.post('/createFunction', handleCreateFunction);
-// router.post('/createFunction', asyncCall);
 
 async function handleCreateFunction(req, res, next){
-  console.log('in the createFunction post route!');
-
   let functionName = req.body.functionName;
   let functionCode = req.body.functionCode;
   let userName = 'betty';
+
   let userDirectory = `./src/users/${userName}`;
-  let filePath = `./src/users/${userName}/${functionName}`;
+  let functionDirectory = `./src/users/${userName}/${functionName}`;
+  let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
   console.log(`req.body: ${util.inspect(req.body)}`);
   console.log(`functionName: ${functionName}`);
   console.log(`functionCode: ${req.body.functionCode}`);
 
-  try {
-    if (await fileExists(userDirectory)) {
-      console.log('file exists');
-    } else {
-      await fsPromises.writeFile(userDirectory, fs.constants.F_OK);
-      console.log('file didnot exist, so it has been created');
-  
+
+  if (await fileExists(userDirectory) !== true) {
+    try {
+      await fsPromises.mkdir(userDirectory);
+      console.log(`directory didn't exist, so it has been created`);
+    } catch (err) {
+      console.log(`error on directory creation: ${err}`);
     }
-  } catch (err) {
-    throw err(`error on file manipulation: ${err}`);
+  } else {
+    console.log(`${userDirectory} exists, doing nothing`);
+  }
+  
+  if (await fileExists(functionDirectory) !== true) {
+    try {
+      await fsPromises.mkdir(functionDirectory);
+      console.log(`directory didn't exist, so it has been created`);
+    } catch (err) {
+      console.log(`error on directory creation: ${err}`);
+    }
+  } else {
+    console.log(`${functionDirectory} exists, doing nothing`);
   }
 
+  if (await fileExists(functionFile) !== true) {
+    try {
+      await fsPromises.writeFile(functionFile, functionCode);
+      console.log(`file didn't exist, so it has been created`);
+    } catch (err) {
+      console.log(`error on file write: ${err}`);
+    }
+  } else {
+    console.log(`${functionFile} exists, doing nothing`);
+  }
   res.status(200).send();
   console.log('end');
-}
-
-module.exports = router;
-
-
-function resolveAfter2Seconds() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve('resolved');
-    }, 2000);
-  });
-}
-
-async function asyncCall() {
-  console.log('calling');
-  var result = await resolveAfter2Seconds();
-  console.log(result);
-  // expected output: 'resolved'
 }
 
 async function fileExists(path){
@@ -80,3 +82,9 @@ async function fileExists(path){
     return false;
   }
 }
+
+module.exports = router;
+
+
+
+
