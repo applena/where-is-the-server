@@ -40,6 +40,23 @@ router.get('/:username/:functionName', (request, response, next) => {
 
 router.post('/createFunction', auth('c'), handleCreateFunction);
 
+async function functionExists(user, functionName){
+  let query = {
+    username: user.username,
+    functionName: functionName,
+  };
+  
+  return Function.find(query)
+    .then( bool => {
+      if (!bool.length){
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .catch( e => e);
+}
+
 /**
  * Asynchronous. Create function handler. Normalizes function name and creates the corresponding user directory, function directory, and function file. 
  * @function handleCreateFunction
@@ -48,17 +65,20 @@ router.post('/createFunction', auth('c'), handleCreateFunction);
  * @param next
  * @returns
  */
-
-function handleCreateFunction(req, res, next){
+async function handleCreateFunction(req, res, next){
   let functionName = req.body.functionName;
+  let functionCode = req.body.functionCode;
+  let userName = req.user.username;
 
   if( !valid_path(functionName) ) {
     next('Invalid function name');
     return;
   }
 
-  let functionCode = req.body.functionCode;
-  let userName = req.user.username;
+  if( await functionExists(req.user, functionName)){
+    next('No duplicate functions allowed');
+    return;
+  }
 
   let dbObj = {functionName:functionName, username:userName};
 
@@ -66,8 +86,6 @@ function handleCreateFunction(req, res, next){
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
-  //saveFunction(functionName);
-  //let functionName = nameFunction.toLowerCase();
   let newFunction = new Function(dbObj);
 
   newFunction.save()
