@@ -1,5 +1,6 @@
 'use strict';
 
+const TOKEN_EXPIRE = Number(process.env.TOKEN_LIFETIME || '300000000000000');
 require('./functions-model');
 
 /**
@@ -84,9 +85,14 @@ users.methods.comparePassword = function(password){
  */
 users.statics.authenticateToken = function(token){
 
+  
   try{
     let parsedToken = jwt.verify(token, SECRET);
-    console.log(parsedToken);
+
+    if((Date.now() - parsedToken.time) > TOKEN_EXPIRE){
+      return Promise.reject('Token Expired');
+    }
+
     let query = {_id: parsedToken.id};
     console.log('token passsed');
     return this.findOne(query);
@@ -110,6 +116,7 @@ users.methods.generateToken = function(type){
   let token = {
     id: this._id,
     capability:this.capability,
+    time: Date.now(),
   };
 
   return jwt.sign(token, SECRET);

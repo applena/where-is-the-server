@@ -51,8 +51,9 @@ router.post('/createFunction', auth('c'), handleCreateFunction);
 
 function handleCreateFunction(req, res, next){
   let functionName = req.body.functionName;
+  let functionNameLower = functionName.toLowerCase();
 
-  if( !valid_path(functionName) ) {
+  if( !valid_path(functionNameLower) ) {
     next('Invalid function name');
     return;
   }
@@ -60,14 +61,13 @@ function handleCreateFunction(req, res, next){
   let functionCode = req.body.functionCode;
   let userName = req.user.username;
 
-  let dbObj = {functionName:functionName, username:userName};
+  let dbObj = {functionName:functionNameLower, username:userName};
 
   let userDirectory = `./src/users/${userName}`;
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
 
   //saveFunction(functionName);
-  //let functionName = nameFunction.toLowerCase();
   let newFunction = new Function(dbObj);
 
   newFunction.save()
