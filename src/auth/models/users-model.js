@@ -109,7 +109,7 @@ users.statics.authenticateToken = function(token){
  * @method generateToken
  *
  * @param string type
- * @returns
+ * @returns bearer token
  */
 users.methods.generateToken = function(type){
   
