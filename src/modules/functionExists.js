@@ -1,6 +1,6 @@
 'use strict';
 
-const Function = require('./auth/models/functions-model');
+const Function = require('../auth/models/functions-model');
 
 async function functionExists(user, functionName){
   let query = {
