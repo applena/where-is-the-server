@@ -12,9 +12,14 @@ echo '{"username":"b e  t ty", "password":"boop", "capabilities":["c","u","d"]}'
 
 ~~~ signin for various users
 http post :3000/signin -a john:johnny
+http post :3000/signin -a betty:boop
 
 POST requests:
 echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunction -a betty:boop
+echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunction -a john:johnny
+
+http get :3000/functions/john -a john:johnny
+http :3000/john/newG
 
 
 GET requests

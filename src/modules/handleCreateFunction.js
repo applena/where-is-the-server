@@ -1,8 +1,9 @@
 'use strict';
 
-const valid_path = require('./modules/valid_path');
+const valid_path = require('./valid_path');
 const functionExists = require('./functionExists');
 const handleCreate = require('./handleCreate');
+const Function = require('../auth/models/functions-model');
 
 /**
  * Asynchronous. Create function handler. Normalizes function name and creates the corresponding user directory, function directory, and function file. 
