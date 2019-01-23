@@ -4,7 +4,7 @@
 
 ~~~ new users with admin capability
 echo '{"username":"john", "password":"johnny", "capabilities":["c","u","d"]}' | http post :3000/signup
-echo '{"username":"betty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
+echo '{"username":"betty", "password":"boop"}' | http post :3000/signup
 
 invalid name:
 echo '{"username":"b e  t ty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
@@ -20,6 +20,8 @@ echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunc
 GET requests
 http :3000/
 http :3000/betty/helloworld
+
+http :3000/getOne -a john:johnny
 
 DELETE requests:
 http delete :3000/ -a john:johnny 
