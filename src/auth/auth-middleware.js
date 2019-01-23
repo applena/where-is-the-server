@@ -2,6 +2,14 @@
 
 const User = require('./models/users-model');
 
+/**
+ * Takes in a capability and authorizes the authenticated user's action if their capability permits them to do so. s
+ * 
+ *@module auth-middleware
+ *
+ * @param string capability
+ * 
+ */
 module.exports = (capability) => {
   return (req, res, next) => {
   
