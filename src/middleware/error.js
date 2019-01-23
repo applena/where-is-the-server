@@ -6,7 +6,7 @@
  */
 
 /**
- * Sends a JSON Formatted 404 Response
+ * Sends a JSON Formatted 500 Response
  * @param err {string} Error Text
  * @param req {object} Express Request Object
  * @param res {object} Express Response Object
