@@ -8,6 +8,7 @@ console.log('loaded the fs.js');
 
 function readFile(file) {
   console.log('🍕🍕🍕🍕 in the mock 1 🍕🍕🍕');
+  console.log(`file: ${file}`);
   if( file.match(/bad/i) ) {
     Promise.reject(new Error('error'));
   }
@@ -29,7 +30,7 @@ function readDir(file) {
 function access(file){
   console.log('🍕🍕🍕 in the mock 1 🍕🍕🍕');
   if( file.match(/bad/i) ) {
-    Promise.reject();
+    throw new Error('error!');
   }
   else {
     Promise.resolve();
