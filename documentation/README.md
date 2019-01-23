@@ -65,71 +65,87 @@ Our app is designed to be easily used by any consumer. No security is needed to 
 
 
 
-<!-- ### Modules
-#### `models/mongo.js`
+### Modules
+#### `auth/modules/handleSignin.js`
 ##### Exported Values and Methods
-###### `Model(schema) -> Class`
-Builds a Class according to the schema that is passed to it to model data.
+###### `handleSignin(req, res, next) -> middleware`
+Middleware function that returns an auth token
 
-#### `middleware/500.js`
+#### `auth/modules/handleSignup.js`
 ##### Exported Values and Methods
-###### `(err, req, res, next) -> res.status(500)`
-Catches server errors and displays 500 status message with error information.
+###### `handleSignup(req, res, next) -> middleware`
+Creates a new User using the User model, saves that user to the database, and then generates an authentication token for that user
 
-#### `middleware/404.js`
+#### `middleware/notFound.js`
 ##### Exported Values and Methods
 ###### `(req, res, next) -> res.status(404)`
 Catches route errors and displays 404 status message with error information.
 
-#### `middleware/model-finder.js`
+#### `middleware/error.js`
 ##### Exported Values and Methods
-###### `(req, res, next) -> require(string for filepath)`
-Parses request object for model parameter. Requires in correct file using template literal and this param.
+###### `(req, res, next) -> res.status(500)`
+Catches errors and displays a 500 status with the error.
 
-#### `auth/middleware.js`
+#### `auth/models/function-model.js`
 ##### Exported Values and Methods
-###### `(req, res, next) -> (req, res, next)`
-Processes functions based on request header content. Authorizes and issues JWT tokens.
+###### `(functionObj) -> an object that contains the function name and the username`
+A mongoose schema of a function which includes functionName and username.
+
+#### `auth/models/users-model.js`
+##### Exported Values and Methods
+###### `(req.body)`
+A mongoose schema of a user and virtually links that users functions. This model also hashes the users password and generates and authenticates the user token
+
+#### `auth/auth-middleware.js`
+##### Exported Values and Methods
+###### `auth middleware`
+authenticates that a user can access the path they are trying to access
 
 #### `auth/router.js`
 ##### Exported Values and Methods
-###### `express router`
-Builds authentication based routes for signup, signin,create new role, oauth, and create key.
+###### `auth router`
+handles the routes for signin and signup
 
-#### `api/v1.js`
+#### `auth/saveFunction.js`
 ##### Exported Values and Methods
-###### `express router`
-Buildes API routes for accessing database information to get, get all, post, put, and delete.
+###### `(functionName) => the name of the function to be saved`
+creates a new instance of a function in the DB, saves it and returns it
 
-#### `auth/roles-model.js`
+#### `modules/fileExists.js`
 ##### Exported Values and Methods
-###### `mongoose schema and model`
-Schema/Model for creating new roles and assigning role based capabilities.
+###### `(path) => the file path`
+returns a boolean if a filepath exists
 
-#### `auth/users-model.js`
+#### `modules/functionExists.js`
 ##### Exported Values and Methods
-###### `instance of user class using schema`
-Model for creating new users.
+###### `(user, functionName) => the name of the user and the name of the function`
+returns a boolean if a functionName already exists for a given user
 
-#### `models/players/players-model.js`
+#### `modules/handleCreate.js`
 ##### Exported Values and Methods
-###### `instance of player class using schema`
-Model for creating new players.
+###### `(path, data) => the filepath and the function data`
+writes a the new function to a file or overwrites a function that already exists
 
-#### `models/players/players-schema.js`
+#### `modules/handleCreateFunction.js`
 ##### Exported Values and Methods
-###### `mongoose schema`
-Schema for formatting data for use in the database.
+###### `(req, res, next) => the request, response and next object`
+saves a new function name and username to the database and handles the creation proccess for that function
 
-#### `models/teams/teams-model.js`
+#### `modules/handleGetUserfunctions.js`
 ##### Exported Values and Methods
-###### `instance of teams class using schema`
-Model for creating new teams and 
+###### `(req, res, next) => the request, response and next object`
+Asynchronous. Performs fs.readdir on the user's directory. If no directory exists, next() is called with 'Resource not found'
 
-#### `models/teams/teams-schema.js`
+#### `modules/parseJson.js`
 ##### Exported Values and Methods
-###### `mongoose schema`
-Schema for formatting data for use in the database. -->
+###### `(obj) => the response object from a function`
+Determines whether the return from the stored function is a JSON object or otherwise. If it is a JSON object it returns true, else it returns false
+
+#### `modules/valid_path.js`
+##### Exported Values and Methods
+###### `(str) => file path string`
+Determines whether a string is valid for file paths
+
 
 ### Setup
 #### `.env` requirements
