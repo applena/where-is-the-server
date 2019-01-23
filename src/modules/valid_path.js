@@ -1,7 +1,4 @@
 'use strict';
-
-
-
 /**
  * Determines whether a string is valid for file paths
  * @module src/modules/valid_path
@@ -23,20 +20,5 @@ function validator(string){
 
   return valid;
 }
-
-// test cases:
-/*
-`regular_user`
-`bad user`
-`mischevious/user`
-`bad.//user`
-`bad$us#er../../../`
-`../../../badu!ser`
-`!@#$%^&*()'`
-`../`
-`/`
-`..`
-``
-*/
 
 module.exports = validator;

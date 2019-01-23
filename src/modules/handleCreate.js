@@ -15,14 +15,7 @@ async function handleCreate(path, data){
     await fs.promises.writeFile(path, data);
   }
   
-  if (await fileExists(path) === true) {
-    if(data){
-      await fs.promises.writeFile(path, data);
-      console.log(`file ${path} exists, and it has been over-written`);
-    } else {
-      console.log(`directory ${path} exists, doing nothing`);
-    }
-  } else {
+  if ( await !fileExists(path)) {
     if(data){
       await fs.promises.writeFile(path, data);
       console.log(`file ${path} didn't exist, so it has been created`);
