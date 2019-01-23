@@ -65,12 +65,16 @@ async function functionExists(user, functionName){
  * @param next
  * @returns
  */
-async function handleCreateFunction(req, res, next){
+function handleCreateFunction(req, res, next){
   let functionName = req.body.functionName;
+
+  let functionNameLower = functionName.toLowerCase();
+
   let functionCode = req.body.functionCode;
   let userName = req.user.username;
 
-  if( !valid_path(functionName) ) {
+
+  if( !valid_path(functionNameLower) ) {
     next('Invalid function name');
     return;
   }
@@ -80,11 +84,14 @@ async function handleCreateFunction(req, res, next){
     return;
   }
 
-  let dbObj = {functionName:functionName, username:userName};
+  let dbObj = {functionName:functionNameLower, username:userName};
 
   let userDirectory = `./src/users/${userName}`;
   let functionDirectory = `./src/users/${userName}/${functionName}`;
   let functionFile = `./src/users/${userName}/${functionName}/index.js`;
+
+
+  //saveFunction(functionName);
 
   let newFunction = new Function(dbObj);
 

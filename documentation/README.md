@@ -1,5 +1,5 @@
+
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
-=================================================
 
 ## WALDO
 
@@ -31,8 +31,6 @@ The first step is to sign-up  by making an account with waldo. To do so enter th
 `http post :3000/signup username='username' password='password'` Replace the quoted 'username' and 'password' with your own username and password without quotes. 
 
 This will return you a token which you can use later to signin.
-
-<br>
 
 #### 2. Authorization
 Once you've created an account you are assigned permissions to visit pages that consumers are not. You will have the ability to deploy functions to our database. You may also read your deployed functions. To sign in,  you have two choices:
