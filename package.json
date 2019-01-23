@@ -7,7 +7,7 @@
     "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
     "lint": "eslint **/*.js",
     "test-watch": "jest --watchAll",
-    "test": "jest",
+    "test": "jest --verbose --coverage",
     "start": "node index.js"
   },
   "repository": {
