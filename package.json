@@ -23,9 +23,9 @@
   "homepage": "https://github.com/applena/where-is-the-server#readme",
   "devDependencies": {
     "eslint": "5.12.0",
-    "jest": "23.6.0", 
+    "jest": "23.6.0",
     "jsdocs": "1.0.0",
-    "supertest": "3.3.0",
+    "supertest": "^3.3.0",
     "swagger-ui-express": "4.0.2"
   },
   "dependencies": {

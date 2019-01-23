@@ -36,11 +36,17 @@ function access(file){
   }
 }
 
+function writeFile(path, data){
+  console.log(' 🍄 in the mock 🍄');
+  Promise.resolve();
+}
+
 module.exports = {
   promises: {
     readFile: readFile,
     readDir: readDir,
     access: access,
+    writeFile: writeFile,
   },
   constants: {
     F_OK: true,
