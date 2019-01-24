@@ -29,7 +29,7 @@ function readDir(file) {
 
 function access(file){
   console.log('🍕🍕🍕 in the mock 1 🍕🍕🍕');
-  if( file.match(/bad/i) ) {
+  if( file.match(/dummy/i) ) {
     throw new Error('error!');
   }
   else {
@@ -42,12 +42,18 @@ function writeFile(path, data){
   Promise.resolve();
 }
 
+function mkdir(path){
+  console.log(' 🍄 in the mock 🍄');
+  Promise.resolve();
+}
+
 module.exports = {
   promises: {
     readFile: readFile,
     readDir: readDir,
     access: access,
     writeFile: writeFile,
+    mkdir: mkdir,
   },
   constants: {
     F_OK: true,

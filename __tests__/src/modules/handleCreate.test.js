@@ -1,7 +1,7 @@
 'use strict';
 
 jest.mock('fs');
-
+const fs = require('fs');
 const handleCreate = require('../../../src/modules/handleCreate');
 
 describe ('file can be created', ()=> {
@@ -28,6 +28,20 @@ describe ('file can be created', ()=> {
         done();
       })
       .catch( err => {
+        console.log(`got an error: ${err}`);
+      });
+  });
+
+  it (`mkdir will not be called if the directory already exists`, () => {
+    const path = '../../dummy.dummy';
+    const data = 'hello world';
+    const spy = jest.spyOn(fs.promises, 'mkdir'); 
+
+    return handleCreate(path, data)
+      .then(res => {
+        expect(spy).toHaveBeenCalledWith('foo');
+      })
+      .catch(err => {
         console.log(`got an error: ${err}`);
       });
   });
