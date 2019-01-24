@@ -33,9 +33,28 @@ http delete :3000/ -a john:johnny
 
 'use strict';
 
+~~~~~~~~~
+
 module.exports = (context) => {
-  let a = context.body.a;
-  let b = context.body.b;
+  let a = parseInt(context.body.a);
+  let b = parseInt(context.body.b);
   return a+b;
 };
+
+~~~~~~~~~
+
+'use strict';
+
+module.exports = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+~~~~~~~~~
+
+
+
 

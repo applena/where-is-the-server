@@ -8,18 +8,25 @@ module.exports  = (request, response, next) => {
   let context = {body:request.body, env:process.env, param:request.params, query:request.query};
   let userFunction = require(`./../users/${username}/${functionName}`);
 
-
-  try {
-    let output = userFunction(context);
   
-    if (parseJson(output)){ 
-      response.status(200).json(output);
-    }
+  try {
+    let output = [];
+    output[0] = userFunction(context);
 
-    response.status(200).send(output);
+    Promise.all(output)
+      .then( result => {
+
+        if (parseJson(result)){ 
+          response.status(200).json(result[0]);
+        }
+        response.status(200).send(result[0]);
+      })
+      .catch( e => {
+        response.status(500).send('error running the function 1');
+      });
 
   } catch (e){
-    response.status(500).send('error running the function');
+    response.status(500).send('error running the function 2');
   }
  
 };
