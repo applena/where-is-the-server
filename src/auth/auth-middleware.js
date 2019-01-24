@@ -16,8 +16,6 @@ module.exports = (capability) => {
     try{
    
       let [authType, authString] = req.headers.authorization.split(/\s+/);
-      console.log(authType);
-
 
       switch(authType.toLowerCase()) {
 
@@ -39,7 +37,6 @@ module.exports = (capability) => {
 
       let [username, password] = bufferString.split(':');
       let auth = {username, password};
-      console.log(auth);
 
       return User.authenticateBasic(auth)
         .then(user => _authenticate(user))
@@ -47,7 +44,6 @@ module.exports = (capability) => {
     }
 
     function _authBearer(authString){
-      console.log('inside authbearer');
       return User.authenticateToken(authString)
         .then(user => _authenticate(user))
         .catch(_authError);

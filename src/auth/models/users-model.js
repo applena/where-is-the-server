@@ -29,9 +29,7 @@ users.virtual('functions', {
 });
 
 users.pre('find', function(){
-  console.log('in the pre findOne');
   try{
-    console.log('inside of try');
     this.populate('functions');
   }
   catch(e){
@@ -57,7 +55,6 @@ users.pre('save', function(next){
  * @returns user
  */
 users.statics.authenticateBasic = function(auth){
-  console.log('inside authenticate basic', auth);
   let query = {username: auth.username};
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
@@ -94,7 +91,6 @@ users.statics.authenticateToken = function(token){
     }
 
     let query = {_id: parsedToken.id};
-    console.log('token passsed');
     return this.findOne(query);
   }
   catch(e){

@@ -13,7 +13,6 @@ const util = require('util');
  * @param {function} next Express middleware function
  */
 module.exports = function(req, res, next){
-  console.log('inside handleSingup');
 
   if( !valid_path(req.body.username) ) {
     next('Invalid username');
@@ -23,7 +22,6 @@ module.exports = function(req, res, next){
   let user = new User(req.body);
   user.save()
     .then((user) => {
-      console.log(user);
       User.findOne({_id: user._id})
         .then(user => {
           req.token = user.generateToken();

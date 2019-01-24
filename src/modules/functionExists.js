@@ -7,7 +7,6 @@ async function functionExists(user, functionName){
     username: user.username,
     functionName: functionName,
   };
-  console.log('the query!!!!!!', query);
   
   return Function.find(query)
     .then( bool => !!bool.length)

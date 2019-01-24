@@ -2,11 +2,7 @@
 
 jest.mock('fs');
 const fs = require('fs');
-// const fs = require('../../../__mocks__/fs.js');
 const handleGetUserFunctions = require('../../../src/modules/handleGetUserFunctions');
-// const supertest = require('supertest');
-// const server = require ('../../../src/app.js').app;
-// const mockRequest = supertest(server);
 
 describe ('get user functions from file system', ()=> {
 
@@ -27,13 +23,5 @@ describe ('get user functions from file system', ()=> {
     expect(spy).toHaveBeenCalledWith(expectedPath, expect.any(Function));
   });
 
-  // it (`calls next when path is bad`, () => {
-  //   return mockRequest
-  //     .get('/functions/john')
-  //     .then(results => {
-  //       expect(results.status).toBe(200);
-  //     });
-      
-  // });
 });
 

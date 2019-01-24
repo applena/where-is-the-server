@@ -18,14 +18,11 @@ beforeAll(async (done) => {
 });
 
 afterAll(stopDB);
-
-
  
 describe('Auth Middleware', () => {
 
   // admin:password: YWRtaW46cGFzc3dvcmQ=
   // admin:foo: YWRtaW46Zm9v
-
 
   let errorMessage = 'Resource not found';
 
