@@ -12,8 +12,9 @@ const fs = require('fs');
 function handleGetUserFunctions(req, res, next){
   let username = req.params.username;
   let path = `${process.cwd()}/src/users/${username}`;
-
+  // console.log(`real function 🍌🍌🍌🍌🍌🍌 has been called~ path is ${path}`);
   fs.readdir(path, (err, files) => {
+    // console.log(`In the real readdir function: path is ${path}`);
     if (err){
       next('Resource not found');
     } else {
