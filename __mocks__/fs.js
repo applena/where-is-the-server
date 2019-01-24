@@ -1,5 +1,6 @@
 'use strict';
 
+// const fs = require('fs');
 // mock the fs.promises API functions
 // const fs = require('fs');
 const util = require('util');
@@ -17,9 +18,10 @@ function readFile(file) {
   }
 }
 
-function readDir(file) {
-  console.log('🍕🍕🍕🍕 in the mock 1 🍕🍕🍕');
-  if( file.match(/bad/i) ) {
+function readdir(path, cb) {
+  console.log('🍕🍕🍕🍕 in the mock readdir 🍕🍕🍕');
+  if( path.match(/bad/i) ) {
+    console.log('match on bad')
     Promise.reject(new Error('error'));
   }
   else {
@@ -42,10 +44,14 @@ function writeFile(path, data){
   Promise.resolve();
 }
 
+// fs = jest.mock('fs');
 module.exports = {
+  readFileSync: ()=> {},
+  existSync: ()=> {},
+  readdir: readdir,
   promises: {
     readFile: readFile,
-    readDir: readDir,
+    readdir: readdir,
     access: access,
     writeFile: writeFile,
   },
