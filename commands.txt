@@ -1,0 +1,41 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        Local style
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~ new users with admin capability
+echo '{"username":"john", "password":"johnny"}' | http post :3000/signup
+echo '{"username":"betty", "password":"boop"}' | http post :3000/signup
+
+invalid name:
+echo '{"username":"b e  t ty", "password":"boop"}' | http post :3000/signup
+
+
+~~~ signin for various users
+http post :3000/signin -a john:johnny
+http post :3000/signin -a betty:boop
+
+POST requests:
+echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunction -a betty:boop
+echo '{"functionName":"foo", "functionCode":"lol"}' | http post :3000/createFunction -a bob:burgers
+
+http get :3000/functions/john -a john:johnny
+http :3000/john/newG
+
+
+GET requests
+http :3000/
+http :3000/betty/helloworld
+
+http :3000/getOne -a john:johnny
+
+DELETE requests:
+http delete :3000/ -a john:johnny 
+
+'use strict';
+
+module.exports = (context) => {
+  let a = context.body.a;
+  let b = context.body.b;
+  return a+b;
+};
+

@@ -1,0 +1,197 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "WALDO - a serverless server system",
+    "version": "1.0.0",
+    "title": "WALDO",
+    "contact": {
+      "email": "applena@gmail.com"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "user",
+      "description": "authenticate users"
+    },
+    {
+      "name": "routes",
+      "description": "accessable routes"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "signs a user up",
+        "description": "",
+        "operationId": "signup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/signup"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "signs a user in",
+        "description": "",
+        "operationId": "signin",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/signin"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/key": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "gets a key",
+        "description": "",
+        "operationId": "key",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/{username}/{functionName}": {
+      "get": {
+        "tags": [
+          "routes"
+        ],
+        "summary": "accessable routes",
+        "operationId": "routes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string",
+            "description": "the name of the user"
+          },
+          {
+            "in": "path",
+            "name": "functionName",
+            "required": true,
+            "type": "string",
+            "description": "the name of the function"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "definitions": {
+    "signin": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "signup": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "capability": {
+          "enum": [
+            "c",
+            "u",
+            "d"
+          ]
+        }
+      }
+    }
+  }
+}
