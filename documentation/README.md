@@ -184,10 +184,10 @@ USER_TOKEN=$(http POST :3000/signup username=$USER_NAME password=yo role=user)
 ```bash
 
 #first sign up a new user
-USER_NAME=bob
+USER_NAME=catherine
 CAPABILITIES='["c", "r", "u", "d"]'
 FUNCTIONNAME=testFunction
-FUNCTIONCODE="module.exports=()=>{return 'hello world';};"
+FUNCTIONCODE="module.exports=()=>{return 2+2;};"
 
 USER_TOKEN=$(http POST :3000/signup username=$USER_NAME password=yo role=user)
 

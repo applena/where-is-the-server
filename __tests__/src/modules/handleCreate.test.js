@@ -33,7 +33,7 @@ describe ('file can be created', ()=> {
   });
 
   it (`mkdir will not be called if the directory already exists`, () => {
-    const path = '../../dummy.dummy';
+    const path = '../../../__mocks__/dummy.dummy';
     const data = 'hello world';
     const spy = jest.spyOn(fs.promises, 'mkdir'); 
 
