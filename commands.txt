@@ -3,11 +3,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~ new users with admin capability
-echo '{"username":"john", "password":"johnny", "capabilities":["c","u","d"]}' | http post :3000/signup
+echo '{"username":"john", "password":"johnny"}' | http post :3000/signup
 echo '{"username":"betty", "password":"boop"}' | http post :3000/signup
 
 invalid name:
-echo '{"username":"b e  t ty", "password":"boop", "capabilities":["c","u","d"]}' | http post :3000/signup
+echo '{"username":"b e  t ty", "password":"boop"}' | http post :3000/signup
 
 
 ~~~ signin for various users
@@ -31,12 +31,11 @@ http :3000/getOne -a john:johnny
 DELETE requests:
 http delete :3000/ -a john:johnny 
 
-
-
-
 'use strict';
 
-module.exports = () => {
-  return 'hello world';
+module.exports = (context) => {
+  let a = context.body.a;
+  let b = context.body.b;
+  return a+b;
 };
 
