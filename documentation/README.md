@@ -184,7 +184,7 @@ USER_TOKEN=$(http POST :3000/signup username=$USER_NAME password=yo role=user)
 ```bash
 
 #first sign up a new user
-USER_NAME=bob1
+USER_NAME=bob
 CAPABILITIES='["c", "r", "u", "d"]'
 FUNCTIONNAME=testFunction
 FUNCTIONCODE="module.exports=()=>{return 'hello world';};"
