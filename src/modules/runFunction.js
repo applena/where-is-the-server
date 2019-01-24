@@ -12,5 +12,4 @@ module.exports  = (request, response, next) => {
 
   if (output){ response.status(200).json(userFunction(context)); } 
   else { response.status(200).send(userFunction(context)); }
- 
 };
