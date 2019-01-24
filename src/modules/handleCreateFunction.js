@@ -17,7 +17,7 @@ async function handleCreateFunction(req, res, next){
   let functionName = req.body.functionName;
   let functionCode = req.body.functionCode;
   let userName = req.user.username;
-
+  console.log('in handle Create Function with ', functionName, functionCode, userName);
   if( !valid_path(functionName) ) {
     next('Invalid function name');
     return;
