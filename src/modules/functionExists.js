@@ -7,16 +7,11 @@ async function functionExists(user, functionName){
     username: user.username,
     functionName: functionName,
   };
+  console.log('the query!!!!!!', query);
   
   return Function.find(query)
-    .then( bool => {
-      if (!bool.length){
-        return false;
-      } else {
-        return true;
-      }
-    })
-    .catch( e => e);
+    .then( bool => !!bool.length)
+    .catch( e => console.error);
 }
 
 module.exports = functionExists;

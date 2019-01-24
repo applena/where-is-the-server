@@ -2,7 +2,7 @@
 
 jest.mock('fs');
 
-const fileExists = require('../src/modules/fileExists');
+const fileExists = require('../../../src/modules/fileExists');
 
 describe ('file exists', ()=> {
   it (`returns true when a file exists`, () => {
@@ -18,7 +18,7 @@ describe ('file exists', ()=> {
   });
 
   it (`returns false when a bad file path is given`, () => {
-    const path = `./folder/folder2/bad.js`;
+    const path = `./folder/folder2/dummy.js`;
     fileExists(path)
       .then(res => {
         console.log(`result of promise: ${res}`);
