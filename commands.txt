@@ -2,6 +2,33 @@
         Local style
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
+
+module.exports = (context) => {
+  let a = parseInt(context.body.a);
+  let b = parseInt(context.body.b);
+  return a+b;
+}
+
+echo '{"functionName":"sumOfTwo", "functionCode":"module.exports=(context)=>{let a = parseInt(context.body.a);let b = parseInt(context.body.b);return a+b;};"}' | http post :3000/createFunction -a mabel:dog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ~~~ new users with admin capability
 echo '{"username":"john", "password":"johnny"}' | http post :3000/signup
 echo '{"username":"betty", "password":"boop"}' | http post :3000/signup
@@ -31,11 +58,6 @@ http :3000/getOne -a john:johnny
 DELETE requests:
 http delete :3000/ -a john:johnny 
 
-'use strict';
 
-module.exports = (context) => {
-  let a = context.body.a;
-  let b = context.body.b;
-  return a+b;
-};
+
 

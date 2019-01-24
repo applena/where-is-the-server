@@ -1,0 +1,1 @@
+module.exports=(context)=>{let a = parseInt(context.body.a);let b = parseInt(context.body.b);return a+b;};
