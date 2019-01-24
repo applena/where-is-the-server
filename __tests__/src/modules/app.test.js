@@ -1,9 +1,6 @@
 'use strict';
 
-// const supertest = require('supertest');
 const app = require ('../../../src/app.js');
-// const start = require ('../../../src/app.js').start;
-// const mockRequest = supertest(server);
 const util = require('util');
 
 describe ('get user functions from file system', ()=> {

@@ -3,10 +3,8 @@
 process.env.SECRET = 'test';
 
 const jwt = require('jsonwebtoken');
-const User = require('../../../src/auth/models/users-model');
 const server = require('../../../src/app').app;
 const supergoose = require('../../supergoose');
-
 const mockRequest = supergoose.server(server);
 
 let users = {
@@ -81,20 +79,6 @@ describe('Auth Router', () => {
               done();
             });
         });
-
-        // it('throws an error if a user name is not a valid path', (done) => {
-        //   return mockRequest
-        //     .post('/createFunction')
-        //     .set('Authorization', 'bearer '+encodedToken)
-        //     .send({
-        //       functionName:'function', 
-        //       functionCode:'module.exports=()=>{return \'hello world\';};',
-        //     })
-        //     .expect(500)
-        //     .then(response => {
-        //       expect(response.body).toEqual({error: 'Invalid function name'});
-        //     });
-        // });
           
         it('creates a function with a valid function and username', () => {
           return mockRequest
@@ -108,8 +92,15 @@ describe('Auth Router', () => {
   
         });
       });
+      describe('getOne module', () => {
+        it('can get a user out of the database and check to see if it has any functions with the same id', () => {
+          return mockRequest
+            .get('/getOne')
+            .set('Authorization', 'bearer '+encodedToken)
+            .expect(200);
+        });
 
-
+      });
     });
     
   });
