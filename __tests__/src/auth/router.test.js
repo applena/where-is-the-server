@@ -82,12 +82,12 @@ describe('Auth Router', () => {
             });
         });
           
-        it('creates a function with a valid function and username', () => {
+        it('creates a function with a valid function and username', (done) => {
           return mockRequest
             .post('/createFunction')
             .set('Authorization', 'bearer '+encodedToken)
             .send({
-              functionName:'function1', 
+              functionName:'function6', 
               functionCode:'module.exports=()=>{return \'hello world\';};',
             })
             .expect(200);
