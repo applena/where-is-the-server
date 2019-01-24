@@ -64,7 +64,6 @@ users.pre('save', function(next){
  * @returns user
  */
 users.statics.authenticateBasic = function(auth){
-  console.log('inside authenticate basic', auth);
   let query = {username: auth.username};
   return this.findOne(query)
     .then(user => user &amp;&amp; user.comparePassword(auth.password))

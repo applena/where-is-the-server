@@ -10,7 +10,6 @@ const fileExists = require('./fileExists');
  * @param string data
  */
 async function handleCreate(path, data){
-  console.log('in handleCreate');
   if (data){
     await fs.promises.writeFile(path, data);
   }
@@ -18,17 +17,17 @@ async function handleCreate(path, data){
   if (await fileExists(path) === true) {
     if(data){
       await fs.promises.writeFile(path, data);
-      console.log(`file ${path} exists, and it has been over-written`);
+      // console.log(`file ${path} exists, and it has been over-written`);
     } else {
-      console.log(`directory ${path} exists, doing nothing`);
+      // console.log(`directory ${path} exists, doing nothing`);
     }
   } else {
     if(data){
       await fs.promises.writeFile(path, data);
-      console.log(`file ${path} didn't exist, so it has been created`);
+      // console.log(`file ${path} didn't exist, so it has been created`);
     } else {
       await fs.promises.mkdir(path);
-      console.log(`directory ${path} didn't exist, so it has been created`);
+      // console.log(`directory ${path} didn't exist, so it has been created`);
     }
   }
 

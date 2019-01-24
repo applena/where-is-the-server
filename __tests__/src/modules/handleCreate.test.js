@@ -10,12 +10,10 @@ describe ('file can be created', ()=> {
     const data = 'hello';
     handleCreate(path,data)
       .then(res => {
-        console.log(`result of promise: ${res}`);
         expect(res).toEqual(undefined);
         done();
       })
       .catch( err => {
-        console.log(`got an error: ${err}`);
       });
   });
 
@@ -23,12 +21,10 @@ describe ('file can be created', ()=> {
     const path = '/file/path/data.txt';
     handleCreate(path)
       .then(res => {
-        console.log(`result of promise: ${res}`);
         expect(res).toEqual(undefined);
         done();
       })
       .catch( err => {
-        console.log(`got an error: ${err}`);
       });
   });
 
@@ -42,7 +38,6 @@ describe ('file can be created', ()=> {
         expect(spy).toHaveBeenCalledWith('foo');
       })
       .catch(err => {
-        console.log(`got an error: ${err}`);
       });
   });
 });

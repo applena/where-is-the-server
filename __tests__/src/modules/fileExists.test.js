@@ -9,11 +9,9 @@ describe ('file exists', ()=> {
     const path = '/file/path/good.txt';
     fileExists(path)
       .then(res => {
-        console.log(`result of promise: ${res}`);
         expect(res).toEqual(true);
       })
       .catch( err => {
-        console.log(`got an error: ${err}`);
       });
   });
 
@@ -21,11 +19,9 @@ describe ('file exists', ()=> {
     const path = `./folder/folder2/dummy.js`;
     fileExists(path)
       .then(res => {
-        console.log(`result of promise: ${res}`);
         expect(res).toEqual(false);
       })
       .catch( err => {
-        console.log(`got an error: ${err}`);
       });
   });
 

@@ -1,11 +1,8 @@
 'use strict';
 
 const functionExists = require('../../../src/modules/functionExists');
-// const server = require('../../../src/app').app;
 const supergoose = require('../../supergoose');
 const Function = require('../../../src/auth/models/functions-model');
-
-// const mockRequest = supergoose.server(server);
 
 beforeAll( () => {
   supergoose.startDB();
