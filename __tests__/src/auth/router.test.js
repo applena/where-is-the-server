@@ -90,9 +90,13 @@ describe('Auth Router', () => {
               functionName:'function6', 
               functionCode:'module.exports=()=>{return \'hello world\';};',
             })
-            .expect(200);
-  
+            .expect(200)
+            .then(response => {
+              done();
+            });
+            
         });
+        
       });
       describe('getOne module', () => {
         it('can get a user out of the database and check to see if it has any functions with the same id', () => {
