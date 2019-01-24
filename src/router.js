@@ -14,7 +14,9 @@ require('mongoose');
 router.get('/getOne', auth('r'), getOne);
 router.get('/functions/:username/', handleGetUserFunctions);
 router.get('/:username/:functionName', runFunction);
-router.post('/createFunction', auth('c'), handleCreateFunction);
 
+router.post('/:username/:functionName', runFunction);
+
+router.post('/createFunction', auth('c'), handleCreateFunction);
 
 module.exports = router;
