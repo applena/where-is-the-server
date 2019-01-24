@@ -243,3 +243,10 @@ TOKEN_LIFETIME=900000
 
 ## What format does data come back?
 * Data is returned in the form that the admin user specifes in their function
+
+##UML
+![](./assets/initial_notes.jpg)
+![](./assets/mvpDay2.jpg)
+![](./assets/UML.jpg)
+![](./assets/umlDay2.jpg)
+![](./assets/WALDO_MVP_questions.jpg)

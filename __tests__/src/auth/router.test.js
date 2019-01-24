@@ -6,10 +6,12 @@ const jwt = require('jsonwebtoken');
 const server = require('../../../src/app').app;
 const supergoose = require('../../supergoose');
 const mockRequest = supergoose.server(server);
+const User = require('../../../src/auth/models/users-model');
 
 let users = {
   admin: {username: 'admin', password: 'password'},
 };
+let obj = {username:'boboob', password:'yo'};
 
 
 beforeAll( () => {
@@ -80,12 +82,12 @@ describe('Auth Router', () => {
             });
         });
           
-        it('creates a function with a valid function and username', () => {
+        it('creates a function with a valid function and username', (done) => {
           return mockRequest
             .post('/createFunction')
             .set('Authorization', 'bearer '+encodedToken)
             .send({
-              functionName:'function1', 
+              functionName:'function6', 
               functionCode:'module.exports=()=>{return \'hello world\';};',
             })
             .expect(200);
@@ -101,8 +103,51 @@ describe('Auth Router', () => {
         });
 
       });
+
+      // describe('users.pre', () => {
+      //   it('it console logs an error if it can not populate a users with their functions', () => {
+      //     let user = new User(obj);
+      //     user.save()
+      //       .then(userObj => {
+      //         user.find('dan')
+      //           .then(result => {
+      //             expect(result).toEqual('Find error');
+      //           });
+      //       });
+      //   });
+      // });
+
+      // describe('authenticate token error', () => {
+      //   it('it throws an error if the token is invalid', () => {
+      //     let user = new User(obj);
+      //     user.save()
+      //       .then(userObj => {
+      //         userObj.authenticateToken(392840);
+      //         expect(() => {user.authenticateToken(392840);}).toThrow('Invalid token');
+      //       });
+      //   });
+      // });
     });
-    
   });
-  
 });
+    
+
+
+// users.statics.authenticateToken = function(token){
+
+  
+//   try{
+//     let parsedToken = jwt.verify(token, SECRET);
+
+//     if((Date.now() - parsedToken.time) > TOKEN_EXPIRE){
+//       return Promise.reject('Token Expired');
+//     }
+
+//     let query = {_id: parsedToken.id};
+//     return this.findOne(query);
+//   }
+//   catch(e){
+//     throw new Error('Invalid token');
+//   }
+
+// };
