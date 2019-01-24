@@ -65,6 +65,51 @@ describe('Auth Router', () => {
           });
       });
 
+      describe('handle Create Function', () => {
+
+        it('throws an error if a function name is not a valid path', (done) => {
+          return mockRequest
+            .post('/createFunction')
+            .set('Authorization', 'bearer '+encodedToken)
+            .send({
+              functionName:'function foobar', 
+              functionCode:'module.exports=()=>{return \'hello world\';};',
+            })
+            .expect(500)
+            .then(response => {
+              expect(response.text).toEqual('{"error":"Invalid function name"}');
+              done();
+            });
+        });
+
+        // it('throws an error if a user name is not a valid path', (done) => {
+        //   return mockRequest
+        //     .post('/createFunction')
+        //     .set('Authorization', 'bearer '+encodedToken)
+        //     .send({
+        //       functionName:'function', 
+        //       functionCode:'module.exports=()=>{return \'hello world\';};',
+        //     })
+        //     .expect(500)
+        //     .then(response => {
+        //       expect(response.body).toEqual({error: 'Invalid function name'});
+        //     });
+        // });
+          
+        it('creates a function with a valid function and username', () => {
+          return mockRequest
+            .post('/createFunction')
+            .set('Authorization', 'bearer '+encodedToken)
+            .send({
+              functionName:'function1', 
+              functionCode:'module.exports=()=>{return \'hello world\';};',
+            })
+            .expect(200);
+  
+        });
+      });
+
+
     });
     
   });

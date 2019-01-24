@@ -27,6 +27,7 @@ supergoose.startDB = async () => {
   mongoServer = new MongoMemoryServer();
   
   const mongoUri = await mongoServer.getConnectionString();
+  console.log({mongoUri});
   
   const mongooseOptions = {
     useNewUrlParser:true,
