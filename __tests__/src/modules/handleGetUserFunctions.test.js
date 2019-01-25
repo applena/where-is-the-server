@@ -6,7 +6,7 @@ const handleGetUserFunctions = require('../../../src/modules/handleGetUserFuncti
 
 describe ('get user functions from file system', ()=> {
 
-  it (`returns an array of user functions`, () => {
+  it (`returns an array of user functions`, (done) => {
     let expectedPath = `${process.cwd()}/src/users/john`;
     const req = {
       params: {
@@ -21,6 +21,7 @@ describe ('get user functions from file system', ()=> {
     handleGetUserFunctions(req, res, next);
 
     expect(spy).toHaveBeenCalledWith(expectedPath, expect.any(Function));
+    done();
   });
 
 });

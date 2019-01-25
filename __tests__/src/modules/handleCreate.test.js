@@ -28,7 +28,7 @@ describe ('file can be created', ()=> {
       });
   });
 
-  it (`mkdir will not be called if the directory already exists`, () => {
+  it (`mkdir will not be called if the directory already exists`, (done) => {
     const path = '../../../__mocks__/dummy.dummy';
     const data = 'hello world';
     const spy = jest.spyOn(fs.promises, 'mkdir'); 
@@ -36,6 +36,7 @@ describe ('file can be created', ()=> {
     return handleCreate(path, data)
       .then(res => {
         expect(spy).toHaveBeenCalledWith('foo');
+        done();
       })
       .catch(err => {
       });
