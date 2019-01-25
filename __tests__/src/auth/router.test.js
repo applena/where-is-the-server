@@ -82,21 +82,21 @@ describe('Auth Router', () => {
             });
         });
           
-        it('creates a function with a valid function and username', (done) => {
-          return mockRequest
-            .post('/createFunction')
-            .set('Authorization', 'bearer '+encodedToken)
-            .send({
-              functionName:'function8', 
-              functionCode:'module.exports=()=>{return \'hello world\';};',
-            })
-            .expect(200)
-            .then(response => {
-              expect(response.text).toEqual('');
-              done();
-            });
+        //it('creates a function with a valid function and username', (done) => {
+        //  return mockRequest
+        //    .post('/createFunction')
+        //    .set('Authorization', 'bearer '+encodedToken)
+        //   .send({
+        //       functionName:'function8', 
+        //      functionCode:'module.exports=()=>{return \'hello world\';};',
+        //    })
+        //    .expect(200)
+        //    .then(response => {
+        //      expect(response.text).toEqual('');
+        //      done();
+        //    });
 
-        });
+       // });
         
       });
       describe('getOne module', () => {
