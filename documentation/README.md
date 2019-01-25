@@ -245,6 +245,8 @@ TOKEN_LIFETIME=900000
 * Data is returned in the form that the admin user specifes in their function
 
 ##UML
+![](./assets/waldo.png)
+<br>
 ![](./assets/initial_notes.jpg)
 ![](./assets/mvpDay2.jpg)
 ![](./assets/UML.jpg)
