@@ -95,9 +95,9 @@ describe('Auth Router', () => {
               expect(response.text).toEqual('');
               done();
             });
-
+  
         });
-        
+
       });
       describe('getOne module', () => {
         it('can get a user out of the database and check to see if it has any functions with the same id', () => {
@@ -136,23 +136,3 @@ describe('Auth Router', () => {
   });
 });
     
-
-
-// users.statics.authenticateToken = function(token){
-
-  
-//   try{
-//     let parsedToken = jwt.verify(token, SECRET);
-
-//     if((Date.now() - parsedToken.time) > TOKEN_EXPIRE){
-//       return Promise.reject('Token Expired');
-//     }
-
-//     let query = {_id: parsedToken.id};
-//     return this.findOne(query);
-//   }
-//   catch(e){
-//     throw new Error('Invalid token');
-//   }
-
-// };
