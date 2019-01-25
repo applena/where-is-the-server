@@ -87,10 +87,14 @@ describe('Auth Router', () => {
             .post('/createFunction')
             .set('Authorization', 'bearer '+encodedToken)
             .send({
-              functionName:'function6', 
+              functionName:'function8', 
               functionCode:'module.exports=()=>{return \'hello world\';};',
             })
-            .expect(200);
+            .expect(200)
+            .then(response => {
+              expect(response.text).toEqual('');
+              done();
+            });
   
         });
       });
