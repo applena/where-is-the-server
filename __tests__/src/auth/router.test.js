@@ -96,7 +96,6 @@ describe('Auth Router', () => {
               done();
             });
   
-        });
 
       });
       // describe('getOne module', (done) => {
@@ -137,3 +136,4 @@ describe('Auth Router', () => {
   });
 });
     
+
