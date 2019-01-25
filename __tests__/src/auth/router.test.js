@@ -95,8 +95,9 @@ describe('Auth Router', () => {
               expect(response.text).toEqual('');
               done();
             });
-  
+
         });
+        
       });
       describe('getOne module', () => {
         it('can get a user out of the database and check to see if it has any functions with the same id', () => {
