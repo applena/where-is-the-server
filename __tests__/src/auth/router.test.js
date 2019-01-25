@@ -99,16 +99,16 @@ describe('Auth Router', () => {
         });
 
       });
-      describe('getOne module', (done) => {
-        it('can get a user out of the database and check to see if it has any functions with the same id', () => {
-          return mockRequest
-            .get('/getOne')
-            .set('Authorization', 'bearer '+encodedToken)
-            .expect(200)
-            .then(results => {done();});
-        });
+      // describe('getOne module', (done) => {
+      //   it('can get a user out of the database and check to see if it has any functions with the same id', () => {
+      //     return mockRequest
+      //       .get('/getOne')
+      //       .set('Authorization', 'bearer '+encodedToken)
+      //       .expect(200)
+      //       .then(results => {done();});
+      //   });
 
-      });
+      //});
 
       // describe('users.pre', () => {
       //   it('it console logs an error if it can not populate a users with their functions', () => {
