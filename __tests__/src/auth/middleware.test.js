@@ -30,7 +30,7 @@ describe('Auth Middleware', () => {
 
     let cachedToken;
 
-    it('fails a login for a user (admin) with the incorrect basic credentials', () => {
+    it('fails a login for a user (admin) with the incorrect basic credentials', (done) => {
 
       let req = {
         headers: {
@@ -44,6 +44,7 @@ describe('Auth Middleware', () => {
       return middleware(req, res, next)
         .then(() => {
           expect(next).toHaveBeenCalledWith(errorMessage);
+          done();
         });
 
     }); 
@@ -65,7 +66,7 @@ describe('Auth Middleware', () => {
 
     }); 
 
-    it('logs in an admin user with the right credentials', () => {
+    it('logs in an admin user with the right credentials', (done) => {
 
       let req = {
         headers: {
@@ -80,11 +81,12 @@ describe('Auth Middleware', () => {
         .then( () => {
           cachedToken = req.token;
           expect(next).toHaveBeenCalledWith();
+          done();
         });
 
     }); 
 
-    it('logs in an admin user with a correct bearer token', () => {
+    it('logs in an admin user with a correct bearer token', (done) => {
 
       let req = {
         headers: {
@@ -98,6 +100,7 @@ describe('Auth Middleware', () => {
       return middleware(req,res,next)
         .then( () => {
           expect(next).toHaveBeenCalledWith();
+          done();
         });
 
     });
@@ -106,7 +109,7 @@ describe('Auth Middleware', () => {
 
   describe('user authorization', () => {
 
-    it('restricts access to a valid user without permissions', () => {
+    it('restricts access to a valid user without permissions', (done) => {
 
       let req = {
         headers: {
@@ -120,11 +123,12 @@ describe('Auth Middleware', () => {
       return middleware(req,res,next)
         .then( () => {
           expect(next).toHaveBeenCalledWith(errorMessage);
+          done();
         });
 
     }); 
 
-    it('grants access when a user has permission', () => {
+    it('grants access when a user has permission', (done) => {
 
       let req = {
         headers: {
@@ -138,6 +142,7 @@ describe('Auth Middleware', () => {
       return middleware(req,res,next)
         .then( () => {
           expect(next).toHaveBeenCalledWith();
+          done();
         });
 
     }); 

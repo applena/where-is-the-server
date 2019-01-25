@@ -82,32 +82,32 @@ describe('Auth Router', () => {
             });
         });
           
-        //it('creates a function with a valid function and username', (done) => {
-        //  return mockRequest
-        //    .post('/createFunction')
-        //    .set('Authorization', 'bearer '+encodedToken)
-        //   .send({
-        //       functionName:'function8', 
-        //      functionCode:'module.exports=()=>{return \'hello world\';};',
-        //    })
-        //    .expect(200)
-        //    .then(response => {
-        //      expect(response.text).toEqual('');
-        //      done();
-        //    });
-
-       // });
-        
-      });
-      describe('getOne module', () => {
-        it('can get a user out of the database and check to see if it has any functions with the same id', () => {
+        it('creates a function with a valid function and username', (done) => {
           return mockRequest
-            .get('/getOne')
+            .post('/createFunction')
             .set('Authorization', 'bearer '+encodedToken)
-            .expect(200);
-        });
+            .send({
+              functionName:'function8', 
+              functionCode:'module.exports=()=>{return \'hello world\';};',
+            })
+            .expect(200)
+            .then(response => {
+              expect(response.text).toEqual('');
+              done();
+            });
+  
 
       });
+      // describe('getOne module', (done) => {
+      //   it('can get a user out of the database and check to see if it has any functions with the same id', () => {
+      //     return mockRequest
+      //       .get('/getOne')
+      //       .set('Authorization', 'bearer '+encodedToken)
+      //       .expect(200)
+      //       .then(results => {done();});
+      //   });
+
+      //});
 
       // describe('users.pre', () => {
       //   it('it console logs an error if it can not populate a users with their functions', () => {
@@ -137,22 +137,3 @@ describe('Auth Router', () => {
 });
     
 
-
-// users.statics.authenticateToken = function(token){
-
-  
-//   try{
-//     let parsedToken = jwt.verify(token, SECRET);
-
-//     if((Date.now() - parsedToken.time) > TOKEN_EXPIRE){
-//       return Promise.reject('Token Expired');
-//     }
-
-//     let query = {_id: parsedToken.id};
-//     return this.findOne(query);
-//   }
-//   catch(e){
-//     throw new Error('Invalid token');
-//   }
-
-// };
