@@ -48,14 +48,16 @@ You must be signed in to deploy a function.
 * go to `/createFunction` route
 - you will need to put your authorization token in the header to verify your identity
 - add the following information to the body of your request:
-  - functionName = 'function name'
-  - functionCode = 'your function'
+  - `functionName` = `'function name'`
+  - `functionCode` = `'your function'`
 * an example httpie request will look like the following:
-`http :3000/createFunction authorization:bearer\ 'token' functionName='functionTest' functionCode="module.exports=()=>{return 'hello world';};"`
+```
+http :3000/createFunction authorization:bearer\ 'token' functionName='functionTest' functionCode="module.exports=()=>{return 'hello world';};"
+```
 * Functions can send in 'context' as a parameter that holds the following information: `{body:request.body, env:process.env, param:request.params, query:request.query}`
 * NOTE: you will need to remove the white space from your function if using httpie and you must have the double quotes around your code.
 
-Congratulations! Your funciton is now hooked up and will be run by your consumers when they go to the following path: /'username'/'functionName'
+Congratulations! Your funciton is now hooked up and will be run by your consumers when they go to the following path: `/'username'/'functionName'`
 
 ### The Consumer
 Our app is also built to support a consumer user. This is a user who will be visiting the paths that our admin users create
@@ -216,7 +218,7 @@ echo $RUN_FUNCTION
 
 
 ## How do I setup my .env? How do I set that up remotely?
-* To set up your .env, you will need to specify the following variable:
+* To set up your .env, you will need to specify the following variables:
 ```
 MONGODB_URI=mongodb://localhost:27017/users
 PORT=3000
@@ -226,20 +228,20 @@ TOKEN_LIFETIME=900000
 
 ## What routes are supported?
 * user routes:
-/signup
-/signin
-/createFunction
-/${username}/${functionName}
+  - /signup
+  - /signin
+  - /createFunction
+  - /${username}/${functionName}
 
 
 ## How do I call them and what data do they expect?
 * To call the routes, go to the heroku site or your local host and add the route to the end of the URL
 
 ## expected data
-/signup => a token
-/signin => a token
-/createFunction => status 200
-/${username}/${functionName} => whatever the user function specifies
+  - /signup => a token
+  - /signin => a token
+  - /createFunction => status 200
+  - /${username}/${functionName} => whatever the user function specifies
 
 ## What format does data come back?
 * Data is returned in the form that the admin user specifes in their function
