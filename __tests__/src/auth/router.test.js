@@ -82,7 +82,7 @@ describe('Auth Router', () => {
             });
         });
           
-        it('creates a function with a valid function and username', (done) => {
+        xit('creates a function with a valid function and username', (done) => {
           return mockRequest
             .post('/createFunction')
             .set('Authorization', 'bearer '+encodedToken)
