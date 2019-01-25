@@ -99,12 +99,13 @@ describe('Auth Router', () => {
         });
 
       });
-      describe('getOne module', () => {
+      describe('getOne module', (done) => {
         it('can get a user out of the database and check to see if it has any functions with the same id', () => {
           return mockRequest
             .get('/getOne')
             .set('Authorization', 'bearer '+encodedToken)
-            .expect(200);
+            .expect(200)
+            .then(results => {done();});
         });
 
       });
